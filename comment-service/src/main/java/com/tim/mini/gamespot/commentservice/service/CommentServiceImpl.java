@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -24,16 +25,26 @@ public class CommentServiceImpl implements CommentService{
 
     @Override
     public CommentDTO getCommentById(Long id) {
-        return null;
+        Comment comment = commentRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Comment not Found."));
+        return commentMapper.toDTO(comment);
     }
 
     @Override
     public List<CommentDTO> getAllComments() {
-        return List.of();
+        return commentRepository
+                .findAll()
+                .stream()
+                .map(commentMapper::toDTO)
+                .collect(Collectors
+                        .toList());
     }
 
     @Override
-    public void deleteUser(long id) {
-
+    public void deleteComment(long id) {
+    if (!commentRepository.existsById(id)){
+        throw new RuntimeException("Comment not found.");
+    }
+    commentRepository.deleteById(id);
     }
 }

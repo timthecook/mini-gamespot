@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 @Data
@@ -21,8 +21,9 @@ public class Comment {
 
     private String content;
 
+
     private Long articleId;
     private Long userId;
 
-    private LocalDateTime createdAt;
+    private LocalDate createdAt;
 }

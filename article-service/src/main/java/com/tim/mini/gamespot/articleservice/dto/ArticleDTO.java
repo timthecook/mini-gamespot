@@ -1,15 +1,15 @@
-package com.tim.mini.gamespot.commentservice.dto;
+package com.tim.mini.gamespot.articleservice.dto;
+
 
 import lombok.Data;
 
 import java.time.LocalDate;
 
 @Data
-public class CommentDTO {
+public class ArticleDTO {
     private Long id;
+    private String title;
     private String content;
-    private Long articleId;
-    private Long userId;
+    private String imageUrl;
     private LocalDate createdAt;
-
 }

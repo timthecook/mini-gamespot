@@ -8,5 +8,5 @@ public interface CommentService {
     CommentDTO createComment(CommentDTO comment);
     CommentDTO getCommentById(Long id);
     List<CommentDTO> getAllComments();
-    void deleteUser(long id);
+    void deleteComment(long id);
 }
