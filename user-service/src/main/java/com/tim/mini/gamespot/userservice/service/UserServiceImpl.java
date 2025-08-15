@@ -2,10 +2,10 @@ package com.tim.mini.gamespot.userservice.service;
 
 import com.tim.mini.gamespot.userservice.dto.UserDTO;
 import com.tim.mini.gamespot.userservice.entity.UserEntity;
+import com.tim.mini.gamespot.userservice.exception.UserNotFoundException;
 import com.tim.mini.gamespot.userservice.mapper.UserMapper;
 import com.tim.mini.gamespot.userservice.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public UserDTO getUserById(Long id) {
         UserEntity userEntity = userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("User not found."));
+                .orElseThrow(() -> new UserNotFoundException("User not found."));
         return userMapper.toDTO(userEntity);
     }
 
@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public void deleteUser(long id) {
     if (!userRepository.existsById(id)){
-        throw new RuntimeException("User not found.");
+        throw new UserNotFoundException("User not found.");
     }
     userRepository.deleteById(id);
     }

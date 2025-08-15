@@ -2,6 +2,7 @@ package com.tim.mini.gamespot.commentservice.service;
 
 import com.tim.mini.gamespot.commentservice.dto.CommentDTO;
 import com.tim.mini.gamespot.commentservice.entity.Comment;
+import com.tim.mini.gamespot.commentservice.exception.CommentNotFoundException;
 import com.tim.mini.gamespot.commentservice.mapper.CommentMapper;
 import com.tim.mini.gamespot.commentservice.repository.CommentRepository;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +27,7 @@ public class CommentServiceImpl implements CommentService{
     @Override
     public CommentDTO getCommentById(Long id) {
         Comment comment = commentRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Comment not Found."));
+                .orElseThrow(() -> new CommentNotFoundException("Comment not Found."));
         return commentMapper.toDTO(comment);
     }
 
@@ -43,7 +44,7 @@ public class CommentServiceImpl implements CommentService{
     @Override
     public void deleteComment(long id) {
     if (!commentRepository.existsById(id)){
-        throw new RuntimeException("Comment not found.");
+        throw new CommentNotFoundException("Comment not found.");
     }
     commentRepository.deleteById(id);
     }
