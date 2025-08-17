@@ -6,7 +6,7 @@ export default function ArticleList(){
     const [articles, setArticles] = useState([]);
 
     useEffect(() => {
-        api.get("/api/articles")
+        api.get("/articles")
             .then(res => setArticles(res.data))
             .catch(err => console.error(err));
     }, []);

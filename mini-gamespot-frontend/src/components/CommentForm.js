@@ -10,7 +10,7 @@ export default function CommentForm({onAdd}){
         setComment(""); // reset input
     };
 
-    return;(
+    return(
         <form onSubmit={handleSubmit}>
             <input
                 type="text"
