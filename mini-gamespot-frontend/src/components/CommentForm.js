@@ -14,6 +14,7 @@ export default function CommentForm({onAdd}){
         <form onSubmit={handleSubmit}>
             <input
                 type="text"
+                className="comment-input"
                 placeholder="Write a comment..."
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}

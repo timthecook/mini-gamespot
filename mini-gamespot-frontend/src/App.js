@@ -3,6 +3,7 @@ import ArticleList from "./pages/ArticleList";
 import ArticleDetail from "./pages/ArticleDetail";
 import CommentsPage from "./pages/CommentsPage";
 import UserProfile from "./pages/UserProfile";
+import "./App.css";
 import Navbar from "./components/Navbar";
 
 function App() {
