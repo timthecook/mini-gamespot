@@ -25,5 +25,11 @@ public class Comment {
     private Long articleId;
     private Long userId;
 
+    @Column(nullable = false, updatable = false)
     private LocalDate createdAt;
+
+    @PrePersist
+    protected void onCreate(){
+        this.createdAt = LocalDate.now();
+    }
 }

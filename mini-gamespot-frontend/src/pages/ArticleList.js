@@ -1,12 +1,13 @@
 import {useEffect, useState} from "react";
-import api from "../api/axiosConfig";
 import {Link} from "react-router-dom";
+import { articleApi } from "../api/axiosConfig";
 
 export default function ArticleList(){
     const [articles, setArticles] = useState([]);
 
     useEffect(() => {
-        api.get("/articles")
+        articleApi
+            .get("")
             .then(res => setArticles(res.data))
             .catch(err => console.error(err));
     }, []);

@@ -30,3 +30,4 @@ public class Article {
     @Column(name = "created_at")
     private LocalDate createdAt;
 }
+

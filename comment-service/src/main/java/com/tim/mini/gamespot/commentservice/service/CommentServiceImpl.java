@@ -8,6 +8,7 @@ import com.tim.mini.gamespot.commentservice.repository.CommentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,14 +22,28 @@ public class CommentServiceImpl implements CommentService{
     @Override
     public CommentDTO createComment(CommentDTO commentDTO) {
         Comment comment = commentMapper.toEntity(commentDTO);
+        if(comment.getCreatedAt() == null){
+            comment.setCreatedAt(LocalDate.now());
+        }
         return commentMapper.toDTO(commentRepository.save(comment));
     }
 
     @Override
     public CommentDTO getCommentById(Long id) {
-        Comment comment = commentRepository.findById(id)
+        Comment comment = commentRepository
+                .findById(id)
                 .orElseThrow(() -> new CommentNotFoundException("Comment not Found."));
         return commentMapper.toDTO(comment);
+    }
+
+    @Override
+    public CommentDTO updateComment(Long id, CommentDTO dto) {
+        Comment comment = commentRepository
+                .findById(id)
+                .orElseThrow(() -> new CommentNotFoundException("Comment not found"));
+        comment.setContent(dto.getContent());
+        comment.setCreatedAt(LocalDate.now());
+        return commentMapper.toDTO(commentRepository.save(comment));
     }
 
     @Override
@@ -39,6 +54,14 @@ public class CommentServiceImpl implements CommentService{
                 .map(commentMapper::toDTO)
                 .collect(Collectors
                         .toList());
+    }
+
+    @Override
+    public List<CommentDTO> getCommentsByArticle(Long articleId) {
+        List<Comment> comments = commentRepository.findByArticleId(articleId);
+        return comments.stream()
+                .map(commentMapper::toDTO)
+                .collect(Collectors.toList());
     }
 
     @Override

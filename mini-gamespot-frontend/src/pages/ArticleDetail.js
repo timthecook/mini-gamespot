@@ -1,7 +1,8 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import api from "../api/axiosConfig";
+import {articleApi, commentApi} from "../api/axiosConfig";
 import CommentForm from "../components/CommentForm";
+import CommentList from "../components/CommentList";
 
 export default function ArticleDetail() {
     const { id } = useParams();
@@ -9,19 +10,20 @@ export default function ArticleDetail() {
     const [comments, setComments] = useState([]);
 
     useEffect(() => {
-        api.get(`/articles/${id}`)
+        articleApi
+            .get(`/${id}`)
             .then(res => setArticle(res.data))
             .catch(err => console.error(err));
     }, [id]);
 
     useEffect(() => {
-        api.get(`comments?articleId=${id}`)
+        commentApi.get(`?articleId=${id}`)
             .then(res => setComments(res.data))
             .catch(err => console.error(err));
     },[id]);
 
     const handleAddComment = (newComment) => {
-        api.post("/comments",{
+        commentApi.post("",{
             content: newComment,
             articleId: id,
             userId: 1 //temp hardcode
@@ -41,12 +43,8 @@ export default function ArticleDetail() {
             <hr />
 
             <h2>Comments</h2>
-            <ul>
-                {comments.map(c => (
-                    <li key={c.id}>{c.content}</li>
-                ))}
-            </ul>
-                    <CommentForm onAdd={handleAddComment} />
+            <CommentList comments={comments} setComments={setComments} />
+            <CommentForm onAdd={handleAddComment} />
         </div>
     );
 }
