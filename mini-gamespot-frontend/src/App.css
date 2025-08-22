@@ -67,3 +67,34 @@
 .comment-form button:hover {
   background: #0056b3;
 }
+
+.comment-item button:last-child {
+  background: #dc3545;
+  color:white;
+}
+
+.comment-item button:last-child:hover{
+  background: #a71d2a;
+}
+
+.edit-input{
+  flex: 1;
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.edit-btn,
+.save-btn{
+  margin-left: 8px;
+  padding: 4px 8px;
+  background: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.edit-btn:hover,
+.save-btn:hover{
+  background: #e0e0e0;
+}

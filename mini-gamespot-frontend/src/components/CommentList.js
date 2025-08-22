@@ -23,23 +23,38 @@ export default function CommentList({ comments, setComments }) {
             })
             .catch(err => console.error(err));
     };
+    const handleDelete = (id) => {
+        commentApi.delete(`/${id}`)
+            .then(() => {
+            setComments(comments.filter(c => c.id !== id));
+        })
+            .catch(err => console.error("Error deleting comment:", err));
+    }
 
     return (
-        <ul>
+
+        <ul className="comment-list">
             {comments.map((c) => (
-                <li key={c.id}>
+                <li key={c.id} className="comment-item">
                     {editingId === c.id ? (
                         <>
                             <input
                                 value={editContent}
                                 onChange={(e) => setEditContent(e.target.value)}
                             />
-                            <button onClick={() => handleSaveEdit(c.id)}>Save</button>
+                            <button className="save-btn" onClick={()=> handleSaveEdit(c.id)}>
+                                Save
+                            </button>
                         </>
                     ) : (
                         <>
-                            {c.content}
-                            <button onClick={() => startEditing(c)}>Edit</button>
+                        <span>{c.content}</span>
+                            <button className="edit-btn" onClick={() => startEditing(c)}>
+                                Edit
+                            </button>
+                            <button className="delete-btn" onClick={() => handleDelete(c.id)}>
+                                Delete
+                            </button>
                         </>
                     )}
                 </li>
