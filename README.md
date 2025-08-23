@@ -1,28 +1,48 @@
-📝 Mini GameSpot (Work in Progress)
+# Mini GameSpot
 
-Overview
-Mini GameSpot is a lightweight clone of GameSpot’s article and community features. It allows users to browse articles, view details, and interact with a comment system.
+A lightweight full-stack web application for managing and commenting on gaming articles.  
+Built with **Spring Boot (Backend)** and **React (Frontend)**.
 
-Tech Stack
+---
 
-Backend: Spring Boot (Java), REST APIs, H2 (with option to switch to PostgreSQL)
+## Features
 
-Frontend: React (Hooks, Router, Axios for API calls)
+- View a list of articles
+- Add, edit, and delete comments on each article
+- Confirmation modal for safe deletion
+- Basic CSS styling (ready for future polish)
 
-Tools: Maven, IntelliJ IDEA, Postman for API testing
+---
 
-Features (so far)
+## Tech Stack
 
-✅ Article CRUD (create, read, delete)
+- **Backend:** Java 17, Spring Boot, Spring Web, Spring Data JPA, PostgreSQL
+- **Frontend:** React, Axios, CSS
+- **Build & Tools:** Maven, Docker (optional), IntelliJ IDEA
 
-✅ Article list & detail views in React
+---
 
-🚧 Comment system (frontend/backend integration in progress)
+## Screenshots
 
-🚧 Styling & UI polish (upcoming)
+### Home Page
+![Home Page](docs/screenshots/home.png)
 
-Planned
+### Article with Comments
+![Article with Comments](docs/screenshots/article-comments.png)
 
-Add authentication (users tied to comments)
+### Delete Confirmation Modal
+![Delete Confirmation](docs/screenshots/delete-modal.png)
 
-Styling improvements for recruiter demo
+---
+
+## Getting Started
+
+### Prerequisites
+- Java 17+
+- Node.js & npm
+- PostgreSQL (or adjust for in-memory database)
+
+### Backend Setup
+```bash
+cd backend
+./mvnw spring-boot:run
